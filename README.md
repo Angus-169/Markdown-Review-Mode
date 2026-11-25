@@ -14,17 +14,17 @@ the agent to apply in a single pass.
 
 ### 为什么要做这个
 
-AI 生成的文稿，几乎总要改。问题不在于改，而在于**怎么把"要改什么"准确地告诉它**。
+AI 生成的文稿，几乎总要改。但用对话框提修改意见，有两个真实的麻烦：
 
-通常的做法很别扭：
+- **得来回指明位置** —— "第三段那句太长""第二节顺序不对"。AI 得先猜你说的是哪一段，猜错了越改越乱；
+- **换行容易误触发送** —— 意见写长了要换行，一个不小心换行键就变成发送，话还没说完就提交出去了。
 
-- 把意见写在对话里 —— "第三段那句太长了""第二节的逻辑顺序不对"。AI 得先猜你说的是哪一段，猜错了越改越乱；
-- 或者复制粘贴到文档末尾、另开一个文件记着 —— 意见和它针对的文字隔得越来越远，回头看时对不上号；
-- 一条一条说、一条一条改 —— 每改一次都要重新通读，来回很多轮。
+所以这个插件换了个方式：**在文档里选中要修改（或要保留）的内容就地批注，看完之后一次性提交所有修改意见。**
 
-**这个插件的想法很简单：意见应该长在它针对的那句话上。**
-
-你正常读文档，读到哪里觉得不对，就在那里选中文字、写下意见。批注直接以下划线标在原文里，你看到的就是"这句话 + 这句话的问题"。整篇读完，所有意见都留在它们各自的位置上，然后**一次提交**：当前会话的 Agent 把所有批注读走，统一返工，逐条回执改了什么。
+- 读到要改的地方，选中文字写批注 —— 意见就标在这段文字上，不必再指明"是哪一段"；
+- 想保留的内容选中后点 **锁定** —— 标明这段一个字都不许动；
+- 整篇看完，点一次 **提交批注** —— Agent 把所有意见一起改完，逐条回执；
+- 改动被程序限制在**被批注覆盖的段落**里：没有批注的地方，一个字都不动。
 
 一句话：**像在纸上看稿子时用笔在旁边写意见，看完把整本交给助手一次改好。**
 
@@ -98,28 +98,27 @@ npm run verify
 
 ### Why this exists
 
-AI-generated drafts almost always need changes. The hard part is not the
-changing — it is saying **exactly what to change, and where**.
+AI-generated drafts almost always need changes. But writing the comments in a
+chat has two real problems:
 
-The usual ways are awkward:
+- **You have to keep pointing at the place** — "that sentence in section three
+  is too long", "the order in section two is wrong". The agent has to guess
+  which passage you mean, and a wrong guess makes things worse.
+- **A newline becomes Send** — comments get long, you press Enter for a new
+  line, and the message goes off before you have finished saying it.
 
-- Put the comments in the chat — "that sentence in section three is too long",
-  "the order in section two is wrong". The agent has to guess which passage you
-  mean, and a wrong guess makes things worse.
-- Paste comments at the end of the document or into a separate file — the note
-  drifts away from the text it refers to, and by review time you cannot match
-  them up.
-- Go one comment at a time — re-reading the whole draft between every tiny
-  edit, over many rounds.
+So this plugin does it differently: **select the passage you want changed — or
+the one you want kept — comment right there on the text, and submit all of the
+comments in one go once you have finished reading.**
 
-**The idea here is simple: a comment should live on the sentence it is about.**
-
-You read the document normally. When something is wrong, select the passage
-right there and write what needs to change. The comment underlines the original
-text, so what you see is "this sentence + what is wrong with it". By the end,
-every comment sits exactly where it belongs — then you **submit once**. The
-agent in the current session reads all of them, reworks the draft in a single
-pass, and reports what it did for each one.
+- Find something to change: select it and write the comment, which underlines
+  that exact passage — no more "which paragraph was it".
+- Something must stay as it is: select it and click **锁定** (lock) — not one
+  character of that passage may change.
+- Finish the whole document, then click **提交批注** once — the agent applies
+  every comment together and reports back on each one.
+- Changes are held by the program to **the blocks a comment covers**: a block
+  with no comment is not touched at all.
 
 In short: **like marking up a paper draft with a pen, then handing the whole
 marked-up copy to an assistant to fix in one go.**
