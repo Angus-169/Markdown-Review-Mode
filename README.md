@@ -61,7 +61,18 @@ https://github.com/Angus-169/Markdown-Review-Mode.git
 git+ssh://git@github.com/Angus-169/Markdown-Review-Mode.git
 ```
 
-⚠️ 不要填 `git@github.com:Angus-169/Markdown-Review-Mode.git` —— 这是 git 命令行的 scp 写法，pnpm 不接受，会报 `ERR_PNPM_UNSUPPORTED_PROTOCOL`。私有仓库若要走 SSH，在本机 git 配置：
+⚠️ 不要填 `git@github.com:Angus-169/Markdown-Review-Mode.git` —— 这是 git 命令行的 scp 写法，pnpm 不接受，会报 `ERR_PNPM_UNSUPPORTED_PROTOCOL`。
+
+**前提：机器上要装有 git。** pnpm 解析上面任何一种 GitHub 地址时都会调用
+`git ls-remote`。如果报 `'git' 不是内部或外部命令`（或 `git ls-remote failed`），
+说明 git 没装或不在 PATH 里 —— 装上 git 即可，或改用下面的 tarball 地址
+（走 HTTPS 下载，**不需要 git**）：
+
+```
+https://github.com/Angus-169/Markdown-Review-Mode/archive/refs/heads/main.tar.gz
+```
+
+私有仓库若要走 SSH，在本机 git 配置：
 
 ```bash
 git config --global url."git@github.com:".insteadOf https://github.com/
@@ -178,6 +189,16 @@ git+ssh://git@github.com/Angus-169/Markdown-Review-Mode.git
 
 ⚠️ Do **not** enter `git@github.com:Angus-169/Markdown-Review-Mode.git` — that
 is git's scp-style form and pnpm rejects it with `ERR_PNPM_UNSUPPORTED_PROTOCOL`.
+
+**Requires git on the machine.** pnpm calls `git ls-remote` to resolve any of
+the GitHub forms above. If you see `'git' is not recognized` (or
+`git ls-remote failed`), git is missing or not on PATH — install git, or use
+the tarball URL below, which is downloaded over HTTPS and needs **no git**:
+
+```
+https://github.com/Angus-169/Markdown-Review-Mode/archive/refs/heads/main.tar.gz
+```
+
 For a private repository over SSH, configure git on that machine:
 
 ```bash
