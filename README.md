@@ -44,16 +44,23 @@ AI 生成的文稿，几乎总要改。但用对话框提修改意见，有两�
 
 **方式一：让 DSH 安装（推荐）**
 
-在 DSH 的 **插件 → 添加插件** 里填入本仓库地址：
+在 DSH 的 **插件 → 添加插件** 里填入：
 
 ```
-git@github.com:Angus-169/Markdown-Review-Mode.git
+github:Angus-169/Markdown-Review-Mode
 ```
 
-HTTPS 地址也可以：
+这是 pnpm 的 GitHub 简写。下面两种完整写法也可以：
 
 ```
 https://github.com/Angus-169/Markdown-Review-Mode.git
+git+ssh://git@github.com/Angus-169/Markdown-Review-Mode.git
+```
+
+⚠️ 不要填 `git@github.com:Angus-169/Markdown-Review-Mode.git` —— 这是 git 命令行的 scp 写法，pnpm 不接受，会报 `ERR_PNPM_UNSUPPORTED_PROTOCOL`。私有仓库若要走 SSH，在本机 git 配置：
+
+```bash
+git config --global url."git@github.com:".insteadOf https://github.com/
 ```
 
 仓库里已包含编译好的 `lib/`，所以装完即可用，不需要本地 Node 环境。
@@ -148,16 +155,25 @@ byte-identical — so the agent changes exactly what you circled.
 
 **Option 1 — let DSH install it (recommended)**
 
-In **Plugins → Add plugin**, enter this repository's address:
+In **Plugins → Add plugin**, enter:
 
 ```
-git@github.com:Angus-169/Markdown-Review-Mode.git
+github:Angus-169/Markdown-Review-Mode
 ```
 
-An HTTPS URL works too:
+That is pnpm's GitHub shorthand. These full forms work too:
 
 ```
 https://github.com/Angus-169/Markdown-Review-Mode.git
+git+ssh://git@github.com/Angus-169/Markdown-Review-Mode.git
+```
+
+⚠️ Do **not** enter `git@github.com:Angus-169/Markdown-Review-Mode.git` — that
+is git's scp-style form and pnpm rejects it with `ERR_PNPM_UNSUPPORTED_PROTOCOL`.
+For a private repository over SSH, configure git on that machine:
+
+```bash
+git config --global url."git@github.com:".insteadOf https://github.com/
 ```
 
 The compiled `lib/` is committed, so the plugin works right after installation
