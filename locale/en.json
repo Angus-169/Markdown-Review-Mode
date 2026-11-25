@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Markdown Review Mode",
+    "description": "Adds a review layer to Markdown documents in the right sidebar: select text, write a comment, and let the agent rework the draft with the changes highlighted and every comment answered.",
+    "detail": "docs/DETAIL.md"
+  }
+}

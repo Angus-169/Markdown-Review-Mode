@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Markdown 审阅模式",
+    "description": "在右边栏的预览窗格里给 Markdown 文稿加一层审阅：选中文字写批注，Agent 按批注返工，改动高亮并逐条回执。",
+    "detail": "docs/DETAIL.zh.md"
+  }
+}

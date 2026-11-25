@@ -1,0 +1,12 @@
+node_modules/
+# Source maps embed the author's local checkout path; not part of the release.
+*.map
+# NOTES.md is the development log (design decisions, debugging history).
+# It is intentionally not part of the published repository.
+NOTES.md
+# Local-only scripts used during development and release preparation.
+scripts/rename-for-release.mjs
+# npm/pnpm local overrides (machine-specific cache path). See .npmrc.example.
+.npmrc
+*.log
+.DS_Store

@@ -1,0 +1,5 @@
+# Copy to .npmrc for local development to keep the npm cache inside the
+# workspace (avoids EPERM when the user home is not writable).
+cache=./.npm-cache
+audit=false
+fund=false

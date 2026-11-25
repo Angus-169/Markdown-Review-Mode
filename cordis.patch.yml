@@ -1,0 +1,5 @@
+# markdown-review-mode bundle patch. The browser half is discovered through the
+# package's dsh.client manifest; the Host half is this row.
+- insert:
+    - id: markdown-review-mode
+      name: markdown-review-mode
