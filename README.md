@@ -46,41 +46,36 @@ AI 生成的文稿，几乎总要改。但用对话框提修改意见，有两�
 
 ### 安装
 
-**方式一：让 DSH 安装（推荐）**
+**方式一：让 DSH 安装（推荐，不需要 git）**
 
-在 DSH 的 **插件 → 添加插件** 里填入：
-
-```
-github:Angus-169/Markdown-Review-Mode
-```
-
-这是 pnpm 的 GitHub 简写。下面两种完整写法也可以：
-
-```
-https://github.com/Angus-169/Markdown-Review-Mode.git
-git+ssh://git@github.com/Angus-169/Markdown-Review-Mode.git
-```
-
-⚠️ 不要填 `git@github.com:Angus-169/Markdown-Review-Mode.git` —— 这是 git 命令行的 scp 写法，pnpm 不接受，会报 `ERR_PNPM_UNSUPPORTED_PROTOCOL`。
-
-**前提：机器上要装有 git。** pnpm 解析上面任何一种 GitHub 地址时都会调用
-`git ls-remote`。如果报 `'git' 不是内部或外部命令`（或 `git ls-remote failed`），
-说明 git 没装或不在 PATH 里 —— 装上 git 即可，或改用下面的 tarball 地址
-（走 HTTPS 下载，**不需要 git**）：
+在 DSH 的 **插件 → 添加插件** 里填入这个 tarball 地址：
 
 ```
 https://github.com/Angus-169/Markdown-Review-Mode/archive/refs/heads/main.tar.gz
 ```
 
-私有仓库若要走 SSH，在本机 git 配置：
+它走 HTTPS 下载，**不依赖 git** —— 没装 git 的机器也能装。仓库里已包含编译好的
+`lib/`，所以装完即可用，不需要本地 Node 环境。
 
-```bash
-git config --global url."git@github.com:".insteadOf https://github.com/
+**方式二：用 GitHub 地址（需要 git）**
+
+如果机器上装有 git，也可以用更短的 GitHub 简写：
+
+```
+github:Angus-169/Markdown-Review-Mode
 ```
 
-仓库里已包含编译好的 `lib/`，所以装完即可用，不需要本地 Node 环境。
+完整写法也可以：`https://github.com/Angus-169/Markdown-Review-Mode.git` 或
+`git+ssh://git@github.com/Angus-169/Markdown-Review-Mode.git`。
 
-**方式二：从源码构建**
+pnpm 解析这些 GitHub 地址时会调用 `git ls-remote`；如果报 `'git' 不是内部或外部命令`
+或 `git ls-remote failed`，说明 git 没装或不在 PATH 里 —— 请改用方式一。
+
+⚠️ 不要填 `git@github.com:Angus-169/Markdown-Review-Mode.git` —— 这是 git 命令行的 scp
+写法，pnpm 不接受，会报 `ERR_PNPM_UNSUPPORTED_PROTOCOL`。私有仓库若要走 SSH，在本机
+git 配置 `git config --global url."git@github.com:".insteadOf https://github.com/`。
+
+**方式三：从源码构建**
 
 ```bash
 git clone https://github.com/Angus-169/Markdown-Review-Mode.git
@@ -172,43 +167,38 @@ byte-identical — so the agent changes exactly what you circled.
 
 ### Installation
 
-**Option 1 — let DSH install it (recommended)**
+**Option 1 — let DSH install it (recommended, no git needed)**
 
-In **Plugins → Add plugin**, enter:
-
-```
-github:Angus-169/Markdown-Review-Mode
-```
-
-That is pnpm's GitHub shorthand. These full forms work too:
-
-```
-https://github.com/Angus-169/Markdown-Review-Mode.git
-git+ssh://git@github.com/Angus-169/Markdown-Review-Mode.git
-```
-
-⚠️ Do **not** enter `git@github.com:Angus-169/Markdown-Review-Mode.git` — that
-is git's scp-style form and pnpm rejects it with `ERR_PNPM_UNSUPPORTED_PROTOCOL`.
-
-**Requires git on the machine.** pnpm calls `git ls-remote` to resolve any of
-the GitHub forms above. If you see `'git' is not recognized` (or
-`git ls-remote failed`), git is missing or not on PATH — install git, or use
-the tarball URL below, which is downloaded over HTTPS and needs **no git**:
+In **Plugins → Add plugin**, enter this tarball URL:
 
 ```
 https://github.com/Angus-169/Markdown-Review-Mode/archive/refs/heads/main.tar.gz
 ```
 
-For a private repository over SSH, configure git on that machine:
+It downloads over HTTPS and **does not need git** — it works on machines with
+no git installed. The compiled `lib/` is committed, so the plugin works right
+after installation, with no local Node toolchain.
 
-```bash
-git config --global url."git@github.com:".insteadOf https://github.com/
+**Option 2 — GitHub address (needs git)**
+
+If git is installed, the shorter GitHub shorthand works too:
+
+```
+github:Angus-169/Markdown-Review-Mode
 ```
 
-The compiled `lib/` is committed, so the plugin works right after installation
-— no local Node toolchain required.
+The full forms work as well: `https://github.com/Angus-169/Markdown-Review-Mode.git`
+or `git+ssh://git@github.com/Angus-169/Markdown-Review-Mode.git`.
 
-**Option 2 — build from source**
+pnpm calls `git ls-remote` to resolve these. If you see `'git' is not recognized`
+or `git ls-remote failed`, git is missing or not on PATH — use Option 1 instead.
+
+⚠️ Do **not** enter `git@github.com:Angus-169/Markdown-Review-Mode.git` — that
+is git's scp-style form and pnpm rejects it with `ERR_PNPM_UNSUPPORTED_PROTOCOL`.
+For a private repository over SSH, configure git on that machine with
+`git config --global url."git@github.com:".insteadOf https://github.com/`.
+
+**Option 3 — build from source**
 
 ```bash
 git clone https://github.com/Angus-169/Markdown-Review-Mode.git
