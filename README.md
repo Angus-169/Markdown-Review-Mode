@@ -30,7 +30,11 @@ AI 生成的文稿，几乎总要改。但用对话框提修改意见，有两�
 
 ### 它怎么做到的
 
-打开任意 `.md` 文件，右边栏的渲染器下拉里会多出一个 **审阅** 选项。选它之后：
+打开任意 `.md` 文件，右边栏顶部的渲染器下拉里会多出一个 **审阅** 选项：
+
+![渲染器下拉中的「审阅」选项](docs/renderer-dropdown.png)
+
+选它之后：
 
 - 文档以渲染后的样子呈现（标题、粗体、斜体、列表、表格、脚注都正常显示），点某一段则展开成源码；
 - 读到要改的地方，选中文字 → 工具栏点 **批注** 写下意见，或点 **锁定** 标明这段不许动；
@@ -132,8 +136,12 @@ marked-up copy to an assistant to fix in one go.**
 
 ### How it works
 
-Open any `.md` file and a **审阅** renderer appears in the right sidebar's
-dropdown beside the product's own Markdown view. In review mode:
+Open any `.md` file — a **审阅** (Review) option appears in the renderer
+dropdown at the top of the right sidebar, beside Markdown, Code and Plain text:
+
+![The Review option in the renderer dropdown](docs/renderer-dropdown.png)
+
+Select it and:
 
 - The document renders as a document — headings, emphasis, lists, tables and
   footnotes display normally; click a paragraph to open its source.

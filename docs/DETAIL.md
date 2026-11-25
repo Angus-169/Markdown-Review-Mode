@@ -7,9 +7,12 @@ draft, and every comment comes back answered.
 ## What it does
 
 Opening a `.md` file in the right sidebar offers **审阅** in the renderer
-dropdown beside the product's own Markdown view. The review view reads like a
-document: the Markdown renders, the markers fade, and a paragraph opens into
-its source when you click it.
+dropdown beside the product's own Markdown view:
+
+![The Review option in the renderer dropdown](renderer-dropdown.png)
+
+The review view reads like a document: the Markdown renders, the markers fade,
+and a paragraph opens into its source when you click it.
 
 Select a range and a small toolbar appears beside it. **批注** opens a field
 for what is wrong with the passage, **锁定** freezes it. A comment underlines
