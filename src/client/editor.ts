@@ -16,6 +16,7 @@
  */
 
 import { EditorState } from '@codemirror/state'
+import { Compartment } from '@codemirror/state'
 import { EditorView, keymap } from '@codemirror/view'
 import { defaultKeymap, history, historyKeymap } from '@codemirror/commands'
 import { markdown } from '@codemirror/lang-markdown'
@@ -88,6 +89,15 @@ export interface ReviewEditor {
   readonly select: (from: number, to: number) => void
   /** Replace the whole document text, as after the Agent's rework. */
   readonly replaceText: (content: string) => void
+  /**
+   * Make the editor read-only or writable again.
+   *
+   * While a review round is open, the document belongs to the agent: its rework
+   * is computed from the text as it was submitted, and it lands by replacing
+   * the document. Editing in the meantime would lose those edits silently, so
+   * the editor closes for the duration.
+   */
+  readonly setEditable: (editable: boolean) => void
 }
 
 /**
@@ -97,6 +107,7 @@ export interface ReviewEditor {
  * @returns the editor handle.
  */
 export function createReviewEditor(parent: HTMLElement, options: ReviewEditorOptions): ReviewEditor {
+  const editable = new Compartment()
   const state = EditorState.create({
     doc: options.doc,
     extensions: [
@@ -119,7 +130,12 @@ export function createReviewEditor(parent: HTMLElement, options: ReviewEditorOpt
       expandedBlocksField,
       previewDecorations,
       previewClickHandlers(options.onAnnotationClick),
-      EditorView.editable.of(options.editable),
+      // `EditorState.readOnly` is the facet that actually blocks input;
+      // `EditorView.editable` only controls the DOM's contenteditable.
+      editable.of([
+        EditorState.readOnly.of(!options.editable),
+        EditorView.editable.of(options.editable),
+      ]),
       EditorView.updateListener.of(update => {
         if (update.docChanged || update.transactions.some(transaction => transaction.effects.length > 0)) {
           options.onChange(update.state.field(annotationField))
@@ -161,6 +177,14 @@ export function createReviewEditor(parent: HTMLElement, options: ReviewEditorOpt
       if (current === content) return
       view.dispatch({
         changes: { from: 0, to: current.length, insert: content },
+      })
+    },
+    setEditable: (value) => {
+      view.dispatch({
+        effects: editable.reconfigure([
+          EditorState.readOnly.of(!value),
+          EditorView.editable.of(value),
+        ]),
       })
     },
   }

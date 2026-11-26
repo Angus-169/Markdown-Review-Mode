@@ -75,6 +75,15 @@ export interface ReviewEditor {
     readonly select: (from: number, to: number) => void;
     /** Replace the whole document text, as after the Agent's rework. */
     readonly replaceText: (content: string) => void;
+    /**
+     * Make the editor read-only or writable again.
+     *
+     * While a review round is open, the document belongs to the agent: its rework
+     * is computed from the text as it was submitted, and it lands by replacing
+     * the document. Editing in the meantime would lose those edits silently, so
+     * the editor closes for the duration.
+     */
+    readonly setEditable: (editable: boolean) => void;
 }
 /**
  * Create the review editor.

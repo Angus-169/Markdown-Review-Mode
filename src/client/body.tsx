@@ -295,6 +295,13 @@ export function ReviewBody(props: ReviewBodyProps): ReactNode {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text.length > 0])
 
+  // While a round is open, the editor is read-only: the agent's rework is
+  // computed from the text as submitted and lands by replacing the document, so
+  // anything typed in the meantime would be lost silently.
+  useEffect(() => {
+    editorRef.current?.setEditable(roundId === undefined)
+  }, [roundId, result?.settled])
+
   // Poll the round while the Agent works.
   useEffect(() => {
     if (roundId === undefined || result?.settled === true) return
@@ -421,6 +428,13 @@ export function ReviewBody(props: ReviewBodyProps): ReactNode {
   const save = useCallback(async (): Promise<void> => {
     const editor = editorRef.current
     if (editor === undefined || absolutePath === undefined) return
+    // While a round is open, the document belongs to the agent: its rework is
+    // computed from the text as submitted and lands by replacing the document.
+    // Writing now would be overwritten, so it is refused rather than lost.
+    if (roundId !== undefined) {
+      setMessage('Agent 正在按这一轮批注返工，这时写入会被它的结果覆盖。请等返工结束后再保存。')
+      return
+    }
     setSaving(true)
     setMessage(undefined)
     try {
@@ -438,7 +452,7 @@ export function ReviewBody(props: ReviewBodyProps): ReactNode {
     } finally {
       setSaving(false)
     }
-  }, [absolutePath, version])
+  }, [absolutePath, version, roundId])
 
   // The editor's Mod-s binding goes through this ref, so it always calls the
   // current save (with the current version) without recreating the editor.

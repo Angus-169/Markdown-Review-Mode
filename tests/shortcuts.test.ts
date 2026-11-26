@@ -91,3 +91,15 @@ test('Mod-Enter still submits', () => {
   assert.equal(calls.submit, 1)
   editor.view.destroy()
 })
+
+test('the editor can be closed for editing while a round is open', () => {
+  const { editor, view } = build()
+  assert.equal(view.state.readOnly, false, 'the editor starts writable')
+
+  editor.setEditable(false)
+  assert.equal(view.state.readOnly, true, 'the editor closes while a round is open')
+
+  editor.setEditable(true)
+  assert.equal(view.state.readOnly, false, 'the editor opens again when the round is done')
+  editor.view.destroy()
+})
