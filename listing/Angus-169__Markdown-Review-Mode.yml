@@ -1,0 +1,7 @@
+url: https://github.com/Angus-169/Markdown-Review-Mode
+name: Angus-169/Markdown-Review-Mode
+category: ui
+description:
+  en: Review AI-generated Markdown drafts by commenting on the exact passage that needs changing, then submitting every comment at once for the agent to apply in one pass.
+  zh: 在 AI 生成的 Markdown 文稿上就地批注：选中要改的那句话写下意见，看完一次性提交，Agent 统一返工。
+icon: https://raw.githubusercontent.com/Angus-169/Markdown-Review-Mode/main/assets/icon-180.png

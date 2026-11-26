@@ -63,6 +63,7 @@
     "build": "tsc -p tsconfig.json && tsdown --config tsdown.config.ts && node scripts/strip-source-paths.mjs",
     "check:encoding": "node scripts/check-encoding.cjs",
     "check:listing": "node tests/check-listing.mjs",
+    "check:listing-entry": "node scripts/check-listing-entry.mjs",
     "verify:package": "node scripts/verify-package.mjs",
     "verify": "npm run check:encoding && npm run check:listing && npm run typecheck && npm run test && npm run build && npm run verify:package"
   },
