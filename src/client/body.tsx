@@ -136,6 +136,12 @@ export function ReviewBody(props: ReviewBodyProps): ReactNode {
   const saveTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
   const restoredAnnotations = useRef<readonly Annotation[]>([])
   /**
+   * The save action, forwarded into the editor's keymap. It is defined after
+   * the editor is created, so a ref keeps the shortcut pointing at the latest
+   * version without recreating the editor on every render.
+   */
+  const saveRef = useRef<() => void>(() => {})
+  /**
    * The text as it stands in the file.
    *
    * The reader's editing is unsaved work; this is the baseline it is compared
@@ -271,6 +277,7 @@ export function ReviewBody(props: ReviewBodyProps): ReactNode {
         }, SAVE_DEBOUNCE_MS)
       },
       onSubmit: () => { void submit() },
+      onSave: () => { saveRef.current() },
       onAnnotationClick: (annotation, clientX, clientY) => {
         const position = floatingAt(editorRef.current, annotation.from, 'top', clientX, clientY)
         if (position === undefined) return
@@ -433,6 +440,10 @@ export function ReviewBody(props: ReviewBodyProps): ReactNode {
     }
   }, [absolutePath, version])
 
+  // The editor's Mod-s binding goes through this ref, so it always calls the
+  // current save (with the current version) without recreating the editor.
+  useEffect(() => { saveRef.current = () => { void save() } }, [save])
+
   const submit = useCallback(async () => {
     const editor = editorRef.current
     if (editor === undefined) return
@@ -486,7 +497,7 @@ export function ReviewBody(props: ReviewBodyProps): ReactNode {
           type="button"
           className={css.saveAction}
           disabled={!dirty || saving || busy || roundId !== undefined}
-          title={dirty ? '把你的改动写入文件' : '没有未保存的改动'}
+          title={dirty ? '把你的改动写入文件（Ctrl+S）' : '没有未保存的改动'}
           onClick={() => { void save() }}
         >
           {saving ? '保存中…' : dirty ? '保存' : '已保存'}

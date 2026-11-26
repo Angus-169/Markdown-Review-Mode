@@ -40,7 +40,8 @@ AI 生成的文稿，几乎总要改。但用对话框提修改意见，有两�
 - 读到要改的地方，选中文字 → 工具栏点 **批注** 写下意见，或点 **锁定** 标明这段不许动；
 - 每条批注就地以下划线标在原文上，点它可以查看、编辑、删除；
 - 全部看完，点 **提交批注** —— Agent 一次读取所有批注返工，改动高亮，每条意见都有回执；
-- 如果你只是自己想改文字，点 **保存** 直接写回文件，不必经过 Agent。
+- 自己直接改文字，点 **保存** 或按 **Ctrl+S** 写回文件（不必经过 Agent；
+  快捷键会拦下浏览器的"保存网页"对话框）。
 
 批注被当作针对那一段文字的**指令**，不是"帮忙润色"的泛泛请求。程序会校验 Agent 的改动：没有被批注覆盖的块不许改，锁定的块必须逐字节保持原样 —— 所以它改的范围，正好是你圈出来的范围。
 
@@ -157,8 +158,9 @@ Select it and:
 - When you are done reading, click **提交批注** — the agent reads every comment,
   reworks the draft in one pass, highlights the changes, and reports one
   receipt per comment.
-- If you just want to edit the text yourself, click **保存** to write it to the
-  file without going through the agent.
+- If you just want to edit the text yourself, click **保存** or press **Ctrl+S**
+  to write it to the file without going through the agent (the shortcut also
+  suppresses the browser's own save-page dialog).
 
 A comment is treated as an **instruction about that passage**, not a vague
 "please polish this". The plugin checks the agent's work against your marks:

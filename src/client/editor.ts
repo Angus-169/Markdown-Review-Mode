@@ -59,6 +59,13 @@ export interface ReviewEditorOptions {
   readonly onChange: (annotations: readonly Annotation[]) => void
   /** Called when the user presses the submit shortcut inside the editor. */
   readonly onSubmit: () => void
+  /**
+   * Called when the user presses Mod-s (Ctrl+S on Windows) inside the editor.
+   *
+   * Saving is a normal editor action, so it gets the normal shortcut. Binding
+   * it here also stops the browser's own "save page" dialog from taking over.
+   */
+  readonly onSave: () => void
   /** Called when an annotated passage is clicked. */
   readonly onAnnotationClick: (annotation: Annotation, clientX: number, clientY: number) => void
   /** Whether the editor accepts edits. */
@@ -103,6 +110,8 @@ export function createReviewEditor(parent: HTMLElement, options: ReviewEditorOpt
       markdown(),
       keymap.of([
         { key: 'Mod-Enter', run: () => { options.onSubmit(); return true } },
+        // Returning true here consumes the event: no browser save dialog.
+        { key: 'Mod-s', run: () => { options.onSave(); return true } },
         ...defaultKeymap,
         ...historyKeymap,
       ]),

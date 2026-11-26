@@ -39,7 +39,7 @@
   },
   "scripts": {
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "node --experimental-strip-types --test tests/core.test.ts tests/preview.test.ts tests/preview-decorations.test.ts tests/preview-render.test.ts tests/storage.test.ts tests/inline.test.ts tests/dom.test.ts tests/host-write.test.ts tests/host-read.test.ts",
+    "test": "node --experimental-strip-types --test tests/core.test.ts tests/preview.test.ts tests/preview-decorations.test.ts tests/preview-render.test.ts tests/storage.test.ts tests/inline.test.ts tests/dom.test.ts tests/host-write.test.ts tests/host-read.test.ts tests/shortcuts.test.ts",
     "build": "tsc -p tsconfig.json && tsdown --config tsdown.config.ts && node scripts/strip-source-paths.mjs",
     "check:encoding": "node scripts/check-encoding.cjs",
     "verify:package": "node scripts/verify-package.mjs",
