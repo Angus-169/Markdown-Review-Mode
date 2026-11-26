@@ -4,6 +4,26 @@
   "private": false,
   "description": "在 DSH 右边栏的预览窗格里给 Markdown 文稿加一层审阅：选中文字写批注，Agent 按批注返工，改动高亮并逐条回执。",
   "license": "MIT",
+  "author": {
+    "name": "Angus-169"
+  },
+  "homepage": "https://github.com/Angus-169/Markdown-Review-Mode#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Angus-169/Markdown-Review-Mode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Angus-169/Markdown-Review-Mode/issues"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "markdown",
+    "review",
+    "comment",
+    "agent"
+  ],
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -42,8 +62,9 @@
     "test": "node --experimental-strip-types --test tests/core.test.ts tests/preview.test.ts tests/preview-decorations.test.ts tests/preview-render.test.ts tests/storage.test.ts tests/inline.test.ts tests/dom.test.ts tests/host-write.test.ts tests/host-read.test.ts tests/shortcuts.test.ts",
     "build": "tsc -p tsconfig.json && tsdown --config tsdown.config.ts && node scripts/strip-source-paths.mjs",
     "check:encoding": "node scripts/check-encoding.cjs",
+    "check:listing": "node tests/check-listing.mjs",
     "verify:package": "node scripts/verify-package.mjs",
-    "verify": "npm run check:encoding && npm run typecheck && npm run test && npm run build && npm run verify:package"
+    "verify": "npm run check:encoding && npm run check:listing && npm run typecheck && npm run test && npm run build && npm run verify:package"
   },
   "dependencies": {
     "@codemirror/commands": "^6.8.0",
@@ -139,6 +160,7 @@
     "locale/*.json",
     "docs",
     "icon.svg",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ]
 }
